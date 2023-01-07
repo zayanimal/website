@@ -1,4 +1,4 @@
-package moscow.mech.website.entities
+package moscow.mech.website.user.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
@@ -8,9 +8,12 @@ import javax.persistence.GenerationType
 
 @Entity
 @Table(name = "CONTACTS")
-class Contact(
+class ContactEntity(
     val phone: String,
+
     val email: String,
-    val telegram: String,
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 )

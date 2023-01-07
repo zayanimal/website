@@ -1,4 +1,4 @@
-package moscow.mech.website.entities
+package moscow.mech.website.user.entities
 
 import javax.persistence.Entity
 import javax.persistence.Table
@@ -10,9 +10,9 @@ import javax.persistence.JoinColumn
 
 @Entity
 @Table(name = "ADDRESSES")
-data class Address(
-    val idx: Int,
-    @OneToOne @JoinColumn(name = "city_id") val city: City,
+class AddressEntity(
+    val idx: String,
+    @OneToOne @JoinColumn(name = "city_id") val city: CityEntity,
     val street: String,
     val home: String,
     val flat: String,
