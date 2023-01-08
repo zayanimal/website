@@ -3,15 +3,17 @@ package moscow.mech.website.user.dto
 data class User(
     val login: String,
 
-    val surname: String,
-
-    val name: String,
-
-    val middleName: String,
-
     val role: String,
 
-    val address: Address,
+    val address: List<Address>,
 
-    val contact: Contact
+    val contact: List<Contact>,
+
+    val recipient: List<Recipient>,
+
+    val defaultAddressId: Long,
+
+    val defaultContactId: Long,
+
+    val defaultRecipientId: Long
 )

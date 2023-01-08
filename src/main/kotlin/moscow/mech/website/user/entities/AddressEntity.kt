@@ -12,9 +12,18 @@ import javax.persistence.JoinColumn
 @Table(name = "ADDRESSES")
 class AddressEntity(
     val idx: String,
-    @OneToOne @JoinColumn(name = "city_id") val city: CityEntity,
+
+    @OneToOne
+    @JoinColumn(name = "city_id")
+    val city: CityEntity,
+
     val street: String,
+
     val home: String,
+
     val flat: String,
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long
 )

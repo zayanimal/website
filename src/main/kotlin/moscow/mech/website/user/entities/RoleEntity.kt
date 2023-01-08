@@ -8,7 +8,10 @@ import javax.persistence.GenerationType
 
 @Entity
 @Table(name = "ROLES")
-class RoleEntity(
+data class RoleEntity(
     val name: String,
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long
 )

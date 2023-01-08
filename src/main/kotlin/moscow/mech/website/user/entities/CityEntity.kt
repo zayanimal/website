@@ -10,5 +10,8 @@ import javax.persistence.GenerationType
 @Table(name = "CITIES")
 class CityEntity(
     val name: String,
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long
 )

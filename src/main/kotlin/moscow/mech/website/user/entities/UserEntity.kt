@@ -6,19 +6,13 @@ import javax.persistence.Id
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.OneToOne
-import javax.persistence.ManyToOne
 import javax.persistence.JoinColumn
+import javax.persistence.OneToMany
 
 @Entity
 @Table(name = "USERS")
 data class UserEntity(
     val login: String,
-
-    val surname: String,
-
-    val name: String,
-
-    val middleName: String,
 
     val password: String,
 
@@ -26,15 +20,25 @@ data class UserEntity(
     @JoinColumn(name = "role_id")
     val role: RoleEntity,
 
-    @ManyToOne
-    @JoinColumn(name = "address_id")
-    val address: AddressEntity,
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    val address: List<AddressEntity>,
 
-    @ManyToOne
-    @JoinColumn(name = "contact_id")
-    val contact: ContactEntity,
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    val contact: List<ContactEntity>,
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    val recipient: List<RecipientEntity>,
+
+    val defaultAddressId: Long,
+
+    val defaultContactId: Long,
+
+    val defaultRecipientId: Long,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    val id: Long
 )
