@@ -1,4 +1,4 @@
-package moscow.mech.website.user.dto
+package moscow.mech.website.dto.user
 
 data class Recipient(
     val id: Long,
