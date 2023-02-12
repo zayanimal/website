@@ -5,9 +5,9 @@ data class AuthRegistration(
 
     val password: String,
 
-    val address: AuthAddress,
+    val address: List<AuthAddress>,
 
-    val contact: AuthContact,
+    val contact: List<AuthContact>,
 
-    val recipient: AuthRecipient
+    val recipient: List<AuthRecipient>
 )

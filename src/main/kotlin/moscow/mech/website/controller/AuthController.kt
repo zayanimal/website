@@ -5,7 +5,7 @@ import moscow.mech.website.dto.auth.AuthRequest
 import moscow.mech.website.dto.auth.AuthResponse
 import moscow.mech.website.auth.JwtTokenService
 import moscow.mech.website.domain.user.entity.UserEntity
-import moscow.mech.website.user.UserService
+import moscow.mech.website.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
