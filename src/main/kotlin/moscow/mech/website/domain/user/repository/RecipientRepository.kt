@@ -1,6 +1,6 @@
-package moscow.mech.website.user.repositories
+package moscow.mech.website.domain.user.repository
 
-import moscow.mech.website.user.entities.RecipientEntity
+import moscow.mech.website.domain.user.entity.RecipientEntity
 import org.springframework.data.repository.CrudRepository
 
 interface RecipientRepository: CrudRepository<RecipientEntity, Long> {}

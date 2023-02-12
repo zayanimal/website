@@ -1,8 +1,6 @@
-package moscow.mech.website.user.dto
+package moscow.mech.website.dto.auth
 
-data class Address(
-    val id: Long,
-
+data class AuthAddress(
     val index: String,
 
     val city: String,

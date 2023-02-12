@@ -1,60 +1,54 @@
 drop table if exists addresses;
 drop table if exists contacts;
 drop table if exists recipients;
+drop table if exists users_roles;
 drop table if exists users;
 drop table if exists roles;
-drop table if exists cities;
 
 create table roles (
    id long auto_increment primary key,
    name varchar(300)
 );
 
-insert into roles (name) values ('customer');
-insert into roles (name) values ('moderator');
-insert into roles (name) values ('admin');
-
-create table cities (
-    id long auto_increment primary key,
-    name varchar(500)
-);
-
-insert into cities (name) values ('Москва');
-insert into cities (name) values ('Санкт-Петербург');
-insert into cities (name) values ('Казань');
-insert into cities (name) values ('Уфа');
-insert into cities (name) values ('Нижний Новгород');
-insert into cities (name) values ('Иваново');
-insert into cities (name) values ('Владимир');
+insert into roles (name) values ('CUSTOMER');
+insert into roles (name) values ('MODERATOR');
+insert into roles (name) values ('ADMIN');
 
 create table users (
     id long auto_increment primary key,
     login varchar(100) not null,
-    password varchar(100) not null,
-    role_id long not null constraint ROLE_ID_FK references roles(id),
-    default_address_id long not null,
-    default_contact_id long not null,
-    default_recipient_id long not null
+    password varchar(1000) not null
 );
 
-insert into users (login, password, role_id, default_address_id, default_contact_id, default_recipient_id) values ('petryuk', '123', 1, 1, 1, 1);
-insert into users (login, password, role_id, default_address_id, default_contact_id, default_recipient_id) values ('ivanchello', '123', 1, 3, 2, 2);
-insert into users (login, password, role_id, default_address_id, default_contact_id, default_recipient_id) values ('sem47', '123', 1, 4, 4, 3);
+insert into users (login, password) values ('petryuk', '$2a$10$4nTdvS3ihhL4fjd0gj6QMOr7qKtV3ItyODImYanlcWLH7uhvkjkEK');
+insert into users (login, password) values ('ivanchello', '$2a$10$4nTdvS3ihhL4fjd0gj6QMOr7qKtV3ItyODImYanlcWLH7uhvkjkEK');
+insert into users (login, password) values ('sem47', '$2a$10$4nTdvS3ihhL4fjd0gj6QMOr7qKtV3ItyODImYanlcWLH7uhvkjkEK');
+
+create table users_roles(
+    id long auto_increment primary key,
+    user_id long constraint USERS_ID_FK references users(id),
+    role_id long constraint ROLE_ID_FK references roles(id)
+);
+
+insert into users_roles(user_id, role_id) values (1, 2);
+insert into users_roles(user_id, role_id) values (1, 3);
+insert into users_roles(user_id, role_id) values (2, 1);
+insert into users_roles(user_id, role_id) values (3, 1);
 
 create table addresses (
    id long auto_increment primary key,
-   idx varchar(1000),
-   street varchar(1000),
-   home varchar(1000),
-   flat varchar(1000),
-   city_id int constraint CITY_ID_FK references cities(id),
+   idx varchar(255),
+   city varchar(255),
+   street varchar(255),
+   home varchar(255),
+   flat varchar(255),
    user_id long constraint USER_ADDRESS_ID_FK references users(id)
 );
 
-insert into addresses (idx, street, home, flat, city_id, user_id) values ('109232', '1-я Владимирская', 5, 16, 1, 1);
-insert into addresses (idx, street, home, flat, city_id, user_id) values ('775532', 'Комсомольская', 17, 22, 5, 1);
-insert into addresses (idx, street, home, flat, city_id, user_id) values ('223444', 'Ленина', 10, 33, 7, 2);
-insert into addresses (idx, street, home, flat, city_id, user_id) values ('433234', 'Невский проспект', 60, 128, 2, 3);
+insert into addresses (idx, city, street, home, flat, user_id) values ('109232', 'Москва', '1-я Владимирская', 5, 16, 1);
+insert into addresses (idx, city, street, home, flat, user_id) values ('775532', 'Москва', 'Комсомольская', 17, 22, 1);
+insert into addresses (idx, city, street, home, flat, user_id) values ('223444', 'Москва', 'Ленина', 10, 33, 2);
+insert into addresses (idx, city, street, home, flat, user_id) values ('433234', 'Москва', 'Невский проспект', 60, 128, 3);
 
 create table contacts (
     id long auto_increment primary key,

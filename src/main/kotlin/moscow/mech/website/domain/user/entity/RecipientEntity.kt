@@ -1,10 +1,10 @@
-package moscow.mech.website.user.entities
+package moscow.mech.website.domain.user.entity
 
 import javax.persistence.*
 
 @Entity
 @Table(name = "RECIPIENTS")
-data class RecipientEntity(
+class RecipientEntity(
     val surname: String,
 
     val name: String,
@@ -13,5 +13,5 @@ data class RecipientEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long
+    val id: Long? = null
 )
