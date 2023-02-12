@@ -50,7 +50,8 @@ class AuthConfiguration(
                 }.and()
             // Авторизация запросов
             .authorizeRequests()
-                .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/register").permitAll()
                 .anyRequest()
                 .authenticated().and()
             // Фильтр JWT токенов перед username/password фильтром

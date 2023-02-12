@@ -1,4 +1,4 @@
-package moscow.mech.website.user
+package moscow.mech.website.service
 
 import moscow.mech.website.constant.Role
 import moscow.mech.website.domain.user.entity.AddressEntity
@@ -45,31 +45,13 @@ class UserService @Autowired constructor(
     }
 
     fun create(registration: AuthRegistration): UserEntity {
-        val address = registration.address
-        val contact = registration.contact
-        val recipient = registration.recipient
-
         val user = UserEntity(
             registration.username,
             passwordEncoder.encode(registration.password),
-            listOf(roleRepository.findByName(Role.ADMIN.toString()).get()),
-            listOf(AddressEntity(
-                address.index,
-                address.city,
-                address.street,
-                address.home,
-                address.flat
-            )),
-            listOf(ContactEntity(
-                contact.phone,
-                contact.email
-            )
-            ),
-            listOf(RecipientEntity(
-                recipient.surname,
-                recipient.name,
-                recipient.middleName
-            ))
+            listOf(roleRepository.findByName(Role.CUSTOMER.toString()).get()),
+            registration.address.map { AddressEntity(it.index, it.city, it.street, it.home, it.flat) },
+            registration.contact.map { ContactEntity(it.phone, it.email) },
+            registration.recipient.map { RecipientEntity(it.surname, it.name, it.middleName) }
         )
 
         return userRepository.save(user)

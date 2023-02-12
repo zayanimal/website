@@ -1,7 +1,7 @@
 package moscow.mech.website.controller
 
 import moscow.mech.website.dto.user.User
-import moscow.mech.website.user.UserService
+import moscow.mech.website.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
