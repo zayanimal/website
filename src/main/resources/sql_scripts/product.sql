@@ -1,4 +1,5 @@
 drop table if exists products_sizes;
+-- drop table if exists warehouses;
 drop table if exists sizes;
 drop table if exists pictures;
 drop table if exists features;
@@ -26,11 +27,12 @@ create table products (
     id long auto_increment primary key,
     title varchar(500),
     caption varchar(2000),
-    cost integer,
+    base_price long,
+    sale_price long,
     category_id long constraint CATEGORIES_ID_FK references categories(id)
 );
 
-insert into products (title, caption, cost, category_id) values ('FW23 PUFFER Iron', 'Пуховик сезона 22-23', 7700, 1);
+insert into products (title, caption, base_price, sale_price, category_id)values ('FW23 PUFFER Iron', 'Пуховик сезона 22-23', 7700, 8800, 1);
 
 create table sizes (
     id long auto_increment primary key,
@@ -76,3 +78,20 @@ create table products_sizes (
 insert into products_sizes (product_id, size_id) values (1, 2);
 insert into products_sizes (product_id, size_id) values (1, 3);
 insert into products_sizes (product_id, size_id) values (1, 4);
+
+-- create table warehouses (
+--     id long auto_increment primary key,
+--     product_id long constraint PRODUCTS_WAREHOUSES_ID_FK references products(id),
+--     size_id long constraint SIZES_WAREHOUSES_ID_FK references sizes(id),
+--     stock enum('store', 'laboratory'),
+--
+-- );
+--
+-- insert into warehouses (product_id, size_id, stock) values (1, 1, 'store');
+-- insert into warehouses (product_id, size_id, stock) values (1, 2, 'store');
+-- insert into warehouses (product_id, size_id, stock) values (1, 3, 'store');
+-- insert into warehouses (product_id, size_id, stock) values (1, 4, 'store');
+-- insert into warehouses (product_id, size_id, stock) values (1, 1, 'laboratory');
+-- insert into warehouses (product_id, size_id, stock) values (1, 2, 'laboratory');
+-- insert into warehouses (product_id, size_id, stock) values (1, 3, 'laboratory');
+-- insert into warehouses (product_id, size_id, stock) values (1, 4, 'laboratory');
