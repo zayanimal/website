@@ -50,9 +50,22 @@ class AuthConfiguration(
                 }.and()
             // Авторизация запросов
             .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/products/*").permitAll()
+                .antMatchers(
+                    "/login",
+                    "/register",
+                    "/products/*"
+                ).permitAll()
+                // Swagger
+                .antMatchers(
+                    "/v2/api-docs",
+                    "/swagger-resources",
+                    "/swagger-resources/**",
+                    "/configuration/ui",
+                    "/configuration/security",
+                    "/swagger-ui",
+                    "/swagger-ui/**",
+                    "/webjars/**"
+                ).permitAll()
                 .anyRequest()
                 .authenticated().and()
             // Фильтр JWT токенов перед username/password фильтром

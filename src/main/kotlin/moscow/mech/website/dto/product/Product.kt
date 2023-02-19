@@ -4,6 +4,8 @@ data class Product (
 
     val id: Long?,
 
+    val title: String,
+
     val caption: String,
 
     val price: Long,

@@ -28,13 +28,9 @@ spring:
       password: sergey
       roles: manager
 
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          vk:
-#            client-id: 51523985
-#            client-secret: ePlsNXraJ4jBvtdz0EIx
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 
 jwt:
   secret: zayanimal
