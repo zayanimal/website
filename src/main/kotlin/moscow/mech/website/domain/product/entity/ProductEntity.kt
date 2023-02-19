@@ -10,9 +10,7 @@ class ProductEntity (
 
     val caption: String,
 
-    val basePrice: Long,
-
-    val salePrice: Long,
+    val price: Long,
 
     @ManyToOne
     val category: CategoryEntity,

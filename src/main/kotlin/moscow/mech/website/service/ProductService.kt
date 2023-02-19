@@ -17,8 +17,9 @@ class ProductService(
 
         return products.map { Product(
             it.id,
+            it.title,
             it.caption,
-            it.salePrice,
+            it.price,
             it.category.name,
             it.features.map { f -> Feature(f.name, f.description) },
             it.pictures.map { p -> p.identification }
