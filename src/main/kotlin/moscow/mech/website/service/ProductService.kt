@@ -6,10 +6,12 @@ import moscow.mech.website.dto.product.Feature
 import moscow.mech.website.dto.product.Product
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import javax.persistence.EntityManager
 
 @Service
-class ProductService(
-    @Autowired val productRepository: ProductRepository
+class ProductService @Autowired constructor(
+    val productRepository: ProductRepository,
+    val entityManager: EntityManager
 ) {
 
     fun getProducts(categoryId: Long): List<Product> {
