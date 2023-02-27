@@ -1,5 +1,7 @@
 package moscow.mech.website.dto.product
 
+import moscow.mech.website.dto.stock.Stock
+
 data class Product (
 
     val id: Long?,
@@ -14,5 +16,7 @@ data class Product (
 
     val features: List<Feature>,
 
-    val pictures: List<String>
+    val pictures: List<String>,
+
+    val stock: List<Stock>
 )

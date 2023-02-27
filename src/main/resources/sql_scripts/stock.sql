@@ -1,6 +1,6 @@
 drop table if exists attributes;
 drop table if exists attribute_type;
-drop table if exists documents_types;
+drop table if exists document_type;
 drop table if exists warehouse;
 
 create table attribute_type (
@@ -23,14 +23,14 @@ insert into attributes (type_id, name) values (1, 'XS');
 insert into attributes (type_id, name) values (1, 'XL');
 insert into attributes (type_id, name) values (1, 'XXL');
 
-create table documents_types (
+create table document_type (
     id long auto_increment primary key,
     name varchar(100)
 );
 
-insert into documents_types (name) values ('Приход');
-insert into documents_types (name) values ('Расход');
-insert into documents_types (name) values ('Резерв');
+insert into document_type (name) values ('Приход');
+insert into document_type (name) values ('Расход');
+insert into document_type (name) values ('Резерв');
 
 create table warehouse (
     id long auto_increment primary key,
@@ -43,7 +43,7 @@ insert into warehouse (name) values ('Лаборатория');
 create table documents (
     id long auto_increment primary key,
     qty long,
-    type_id long constraint DOCUMENTS_TYPES_ID_FK references documents_types(id),
+    type_id long constraint DOCUMENTS_TYPES_ID_FK references document_type(id),
     product_id long constraint PRODUCTS_DOCUMENTS_ID_FK references products(id),
     attribute_id long constraint ATTRIBUTE_ID_FK references attributes(id),
     warehouse_id long constraint WAREHOUSE_ID_FK references warehouse(id)
