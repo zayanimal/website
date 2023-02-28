@@ -53,7 +53,7 @@ class AuthConfiguration(
                 .antMatchers(
                     "/login",
                     "/register",
-                    "/products/*"
+                    "/product"
                 ).permitAll()
                 // Swagger
                 .antMatchers(

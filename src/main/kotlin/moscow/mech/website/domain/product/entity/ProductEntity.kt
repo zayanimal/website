@@ -6,6 +6,9 @@ import javax.persistence.*
 @Table(name = "PRODUCTS")
 class ProductEntity (
 
+    @Id
+    val id: Long,
+
     val title: String,
 
     val caption: String,
@@ -21,9 +24,5 @@ class ProductEntity (
 
     @OneToMany
     @JoinColumn(name = "product_id")
-    val pictures: List<PictureEntity>,
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    val pictures: List<PictureEntity>
 )

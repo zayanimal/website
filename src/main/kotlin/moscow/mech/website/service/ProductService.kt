@@ -2,9 +2,11 @@ package moscow.mech.website.service
 
 import moscow.mech.website.domain.document.entity.StockEntity
 import moscow.mech.website.domain.product.entity.CategoryEntity
+import moscow.mech.website.domain.product.entity.PictureEntity
 import moscow.mech.website.domain.product.repository.ProductRepository
 import moscow.mech.website.dto.product.Feature
 import moscow.mech.website.dto.product.Product
+import moscow.mech.website.dto.product.ProductCard
 import moscow.mech.website.dto.stock.Stock
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -16,21 +18,35 @@ class ProductService @Autowired constructor(
     val entityManager: EntityManager
 ) {
 
-    fun getProducts(categoryId: Long): List<Product> {
-        val products = productRepository.findByCategory(CategoryEntity(categoryId))
+    fun getProductCard(productId: Long): ProductCard {
+        val product = productRepository.findById(productId).orElseThrow()
         val query = entityManager
             .createNamedQuery("stock_balances", StockEntity::class.java)
-            .setParameter("id", categoryId)
+            .setParameter("id", productId)
+
+        return ProductCard(
+            product.id,
+            product.title,
+            product.price,
+            product.caption,
+            product.features.map { f -> Feature(f.name, f.description) },
+            product.pictures.map { p -> p.identification },
+            query.resultList.map{ s -> Stock(s.size, s.qty) }
+        )
+    }
+
+    fun getProducts(categoryId: Long): List<Product> {
+        val products = productRepository.findByCategory(CategoryEntity(categoryId))
 
         return products.map { Product(
             it.id,
             it.title,
-            it.caption,
             it.price,
-            it.category.name,
-            it.features.map { f -> Feature(f.name, f.description) },
-            it.pictures.map { p -> p.identification },
-            query.resultList.map{ s -> Stock(s.size, s.qty) }
+            getPicture(it.pictures)
         ) }
+    }
+
+    private fun getPicture(pictures: List<PictureEntity>): String {
+        return if (pictures.isEmpty()) "" else pictures.first().identification
     }
 }
