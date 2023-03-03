@@ -1,6 +1,7 @@
 drop table if exists addresses;
 drop table if exists contacts;
 drop table if exists recipients;
+drop table if exists orders;
 drop table if exists users_roles;
 drop table if exists users;
 drop table if exists roles;
