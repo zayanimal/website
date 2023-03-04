@@ -6,11 +6,10 @@ import javax.persistence.*
 @Table(name = "FEATURES")
 class FeatureEntity (
 
+    @Id
+    val id: Long,
+
     val name: String,
 
-    val description: String,
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    val description: String
 )

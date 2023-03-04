@@ -6,9 +6,8 @@ import javax.persistence.*
 @Table(name = "ROLES")
 class RoleEntity(
 
-    val name: String,
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long
+    val id: Long,
+
+    val name: String
 )

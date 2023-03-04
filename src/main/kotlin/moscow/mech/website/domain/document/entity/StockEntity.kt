@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery
         "join AttributeEntity a on a.id = d.attribute.id " +
         "join WarehouseEntity we on we.id = d.warehouse.id " +
         "where d.product.id = :id and d.warehouse.id = 1 " +
-        "group by a.name"
+        "group by a.name having sum(d.qty) > 0"
 )
 @Entity
 class StockEntity (

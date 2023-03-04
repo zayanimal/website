@@ -6,9 +6,8 @@ import javax.persistence.*
 @Table(name = "DOCUMENT_TYPE")
 class DocumentTypeEntity (
 
-    val name: String,
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    val id: Long,
+
+    val name: String
 )

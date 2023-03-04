@@ -53,7 +53,7 @@ create table documents (
 
 insert into documents (qty, user_id, type_id, product_id, attribute_id, warehouse_id) values (10, 1, 1, 1, 1, 1);
 insert into documents (qty, user_id, type_id, product_id, attribute_id, warehouse_id) values (20, 1, 1, 1, 2, 1);
-insert into documents (qty, user_id, type_id, product_id, attribute_id, warehouse_id) values (-1, 1, 3, 1, 4, 1);
+insert into documents (qty, user_id, type_id, product_id, attribute_id, warehouse_id) values (-1, 1, 3, 1, 2, 1);
 insert into documents (qty, user_id, type_id, product_id, attribute_id, warehouse_id) values (-2, 1, 3, 1, 1, 1);
 insert into documents (qty, user_id, type_id, product_id, attribute_id, warehouse_id) values (15, 1, 1, 1, 3, 1);
 insert into documents (qty, user_id, type_id, product_id, attribute_id, warehouse_id) values (-5, 1, 2, 1, 3, 1);

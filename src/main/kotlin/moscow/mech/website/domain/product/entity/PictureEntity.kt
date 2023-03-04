@@ -9,6 +9,5 @@ class PictureEntity (
     val identification: String,
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    val id: Long
 )

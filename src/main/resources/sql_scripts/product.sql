@@ -1,4 +1,3 @@
-drop table if exists documents;
 drop table if exists pictures;
 drop table if exists features;
 drop table if exists products;
