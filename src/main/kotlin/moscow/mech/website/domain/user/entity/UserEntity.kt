@@ -10,7 +10,7 @@ class UserEntity(
 
     val password: String,
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "users_roles",
         joinColumns = [JoinColumn(name = "user_id")],
@@ -18,15 +18,27 @@ class UserEntity(
     )
     val role: List<RoleEntity>,
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
     @JoinColumn(name = "user_id")
     val address: List<AddressEntity>,
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
     @JoinColumn(name = "user_id")
     val contact: List<ContactEntity>,
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
     @JoinColumn(name = "user_id")
     val recipient: List<RecipientEntity>,
 

@@ -1,12 +1,10 @@
 package moscow.mech.website.domain.order.entity
 
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.JoinTable
-import javax.persistence.ManyToMany
-import javax.persistence.ManyToOne
-import javax.persistence.Table
+import moscow.mech.website.domain.document.entity.AttributeEntity
+import moscow.mech.website.domain.document.entity.DocumentEntity
+import moscow.mech.website.domain.product.entity.ProductEntity
+import java.time.LocalDateTime
+import javax.persistence.*
 
 @Entity
 @Table(name = "ORDERS")
@@ -15,15 +13,27 @@ class OrderEntity (
     @Id
     val id: Long,
 
-    @ManyToOne
+    @OrderBy("created DESC")
+    val created: LocalDateTime,
+
+    val qty: Long,
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     val user: UserOrderEntity,
 
-    @ManyToMany
+    @ManyToOne
+    val product: ProductEntity,
+
+    @ManyToOne
+    @JoinColumn(name = "attribute_id")
+    val attribute: AttributeEntity,
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "orders_products",
+        name = "orders_documents",
         joinColumns = [JoinColumn(name = "order_id")],
-        inverseJoinColumns = [JoinColumn(name = "product_id")]
+        inverseJoinColumns = [JoinColumn(name = "document_id")]
     )
-    val product: List<ProductOrderEntity>
+    val documents: DocumentEntity
 )

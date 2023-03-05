@@ -15,14 +15,14 @@ class ProductEntity (
 
     val price: Long,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     val category: CategoryEntity,
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     val features: List<FeatureEntity>,
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     val pictures: List<PictureEntity>
 )

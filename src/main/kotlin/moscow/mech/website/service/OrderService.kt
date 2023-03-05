@@ -1,24 +1,22 @@
 package moscow.mech.website.service
 
-import moscow.mech.website.domain.order.entity.OrderEntity
 import moscow.mech.website.domain.order.repository.OrderRepository
+import moscow.mech.website.dto.order.Order
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 
 @Service
 class OrderService @Autowired constructor(
     val documentService: DocumentService,
-    val orderRepository: OrderRepository
+    val orderRepository: OrderRepository,
 ) {
 
-    fun getOrder(): OrderEntity {
-        val user = SecurityContextHolder.getContext().authentication.principal
+    fun getOrders(): List<Order> {
+        val orders = orderRepository.findByUserId(1)
 
 
-        val order = orderRepository.findById(1)
 
-        return order.get()
+        return listOf()
     }
 
     fun createOrder() {
