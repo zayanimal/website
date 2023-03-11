@@ -1,6 +1,6 @@
 package moscow.mech.website.dto.order
 
-data class ProductOrder (
+data class Item (
     val id: Long,
 
     val qty: Long,
@@ -11,5 +11,5 @@ data class ProductOrder (
 
     val size: String,
 
-    val picture: String
+    val picture: String?
 )

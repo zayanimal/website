@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface OrderRepository : CrudRepository<OrderEntity, Long> {
 
-    fun findByUserId(userId: Long): List<OrderEntity>
+    fun findByUserId(userId: Long): List<OrderEntity>?
 }

@@ -4,8 +4,8 @@ drop table if exists recipients;
 drop table if exists users_roles;
 drop table if exists orders_documents;
 drop table if exists documents;
+drop table if exists orders_item;
 drop table if exists orders;
-drop table if exists orders_ids;
 drop table if exists users;
 drop table if exists roles;
 

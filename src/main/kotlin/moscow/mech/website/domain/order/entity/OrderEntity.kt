@@ -1,8 +1,7 @@
 package moscow.mech.website.domain.order.entity
 
-import moscow.mech.website.domain.document.entity.AttributeEntity
-import moscow.mech.website.domain.document.entity.DocumentEntity
-import moscow.mech.website.domain.product.entity.ProductEntity
+import org.hibernate.annotations.LazyCollection
+import org.hibernate.annotations.LazyCollectionOption
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -16,24 +15,12 @@ class OrderEntity (
     @OrderBy("created DESC")
     val created: LocalDateTime,
 
-    val qty: Long,
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     val user: UserOrderEntity,
 
-    @ManyToOne
-    val product: ProductEntity,
-
-    @ManyToOne
-    @JoinColumn(name = "attribute_id")
-    val attribute: AttributeEntity,
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "orders_documents",
-        joinColumns = [JoinColumn(name = "order_id")],
-        inverseJoinColumns = [JoinColumn(name = "document_id")]
-    )
-    val documents: DocumentEntity
+    @OneToMany
+    @JoinColumn(name = "order_id")
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    val items: List<ItemEntity>
 )

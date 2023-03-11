@@ -8,5 +8,5 @@ data class Order (
 
     val created: LocalDateTime,
 
-    val product: List<ProductOrder>
+    val product: List<Item>
 )
