@@ -4,6 +4,7 @@ import moscow.mech.website.domain.auth.entity.AuthEntity
 import moscow.mech.website.domain.order.repository.OrderRepository
 import moscow.mech.website.domain.product.entity.PictureEntity
 import moscow.mech.website.dto.order.Item
+import moscow.mech.website.dto.order.ItemShortened
 import moscow.mech.website.dto.order.Order
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
@@ -38,8 +39,8 @@ class OrderService @Autowired constructor(
     private fun getPicture(pictures: List<PictureEntity>?): String? = if (!pictures.isNullOrEmpty())
         pictures.first().identification else null
 
-    fun createOrder() {
-
+    fun createOrder(order: List<ItemShortened>) {
+        val res = order
     }
 
     fun deleteOrder() {

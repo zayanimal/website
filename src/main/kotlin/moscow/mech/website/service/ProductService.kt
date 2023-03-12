@@ -31,7 +31,7 @@ class ProductService @Autowired constructor(
             product.caption,
             product.features.map { f -> Feature(f.name, f.description) },
             product.pictures.map { p -> p.identification },
-            query.resultList.map{ s -> Stock(s.size, s.qty) }
+            query.resultList.map{ s -> Stock(s.id, s.size, s.qty) }
         )
     }
 
