@@ -1,30 +1,42 @@
 package moscow.mech.website.service
 
-import moscow.mech.website.domain.auth.entity.AuthEntity
+import moscow.mech.website.domain.document.entity.AttributeEntity
+import moscow.mech.website.domain.document.entity.DocumentEntity
+import moscow.mech.website.domain.document.entity.DocumentTypeEntity
+import moscow.mech.website.domain.document.entity.WarehouseEntity
+import moscow.mech.website.domain.document.repository.DocumentRepository
+import moscow.mech.website.domain.order.entity.ItemEntity
+import moscow.mech.website.domain.order.entity.OrderEntity
+import moscow.mech.website.domain.order.entity.UserOrderEntity
+import moscow.mech.website.domain.order.repository.ItemRepository
 import moscow.mech.website.domain.order.repository.OrderRepository
 import moscow.mech.website.domain.product.entity.PictureEntity
+import moscow.mech.website.domain.product.entity.ProductEntity
+import moscow.mech.website.domain.user.entity.UserEntity
 import moscow.mech.website.dto.order.Item
 import moscow.mech.website.dto.order.ItemShortened
 import moscow.mech.website.dto.order.Order
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
+import javax.persistence.EntityManager
 import kotlin.streams.toList
 
 @Service
 class OrderService @Autowired constructor(
-    val documentService: DocumentService,
+    val securityService: SecurityService,
+    val documentRepository: DocumentRepository,
     val orderRepository: OrderRepository,
+    val itemRepository: ItemRepository,
+    val entityManager: EntityManager
 ) {
 
     fun getOrders(): List<Order> {
-        val user = SecurityContextHolder.getContext().authentication.principal as AuthEntity
-
-        orderRepository.findByUserId(user.id!!) ?.let { return it.map { o -> Order(
-            o.id,
+        orderRepository.findByUserId(securityService.getUserId()) ?.let { return it.map { o -> Order(
+            o.id!!,
             o.created,
-            o.items.stream().map { i -> Item(
-                i.id,
+            o.items!!.stream().map { i -> Item(
+                i.product.id,
                 i.qty,
                 i.product.title,
                 i.product.price,
@@ -40,7 +52,25 @@ class OrderService @Autowired constructor(
         pictures.first().identification else null
 
     fun createOrder(order: List<ItemShortened>) {
-        val res = order
+        val userId = securityService.getUserId()
+        val orderEntity = orderRepository.save(OrderEntity(UserOrderEntity(userId), LocalDateTime.now()))
+
+        val documents = documentRepository.saveAll(order.map { o -> DocumentEntity(
+            -o.qty,
+            entityManager.getReference(UserEntity::class.java, userId),
+            entityManager.getReference(DocumentTypeEntity::class.java, 3L),
+            entityManager.getReference(ProductEntity::class.java, o.id),
+            entityManager.getReference(AttributeEntity::class.java, o.attributeId),
+            entityManager.getReference(WarehouseEntity::class.java, 1L),
+        )})
+
+        itemRepository.saveAll(documents.map { document -> ItemEntity(
+            document.qty * -1,
+            orderEntity,
+            document.product,
+            document.attribute,
+            document
+        ) })
     }
 
     fun deleteOrder() {

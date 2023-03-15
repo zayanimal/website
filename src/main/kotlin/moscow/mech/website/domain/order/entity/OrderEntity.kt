@@ -9,18 +9,19 @@ import javax.persistence.*
 @Table(name = "ORDERS")
 class OrderEntity (
 
-    @Id
-    val id: Long,
-
-    @OrderBy("created DESC")
-    val created: LocalDateTime,
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     val user: UserOrderEntity,
 
+    @OrderBy("created DESC")
+    val created: LocalDateTime,
+
     @OneToMany
     @JoinColumn(name = "order_id")
     @LazyCollection(LazyCollectionOption.EXTRA)
-    val items: List<ItemEntity>
+    var items: List<ItemEntity>? = null,
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 )

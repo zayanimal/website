@@ -9,10 +9,11 @@ import javax.persistence.*
 @Table(name = "ORDERS_ITEM")
 class ItemEntity (
 
-    @Id
-    val id: Long,
-
     val qty: Long,
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    val order: OrderEntity,
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -28,5 +29,9 @@ class ItemEntity (
         joinColumns = [JoinColumn(name = "order_item_id")],
         inverseJoinColumns = [JoinColumn(name = "document_id")]
     )
-    val documents: DocumentEntity
+    val documents: DocumentEntity,
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 )

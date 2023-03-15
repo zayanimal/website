@@ -1,6 +1,7 @@
 package moscow.mech.website.domain.document.entity
 
 import moscow.mech.website.domain.product.entity.ProductEntity
+import moscow.mech.website.domain.user.entity.UserEntity
 import javax.persistence.*
 
 @Entity
@@ -8,6 +9,10 @@ import javax.persistence.*
 class DocumentEntity (
 
     val qty: Long,
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    val user: UserEntity,
 
     @ManyToOne
     @JoinColumn(name = "type_id")
