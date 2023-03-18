@@ -7,6 +7,7 @@ import moscow.mech.website.domain.document.entity.WarehouseEntity
 import moscow.mech.website.domain.document.repository.DocumentRepository
 import moscow.mech.website.domain.order.entity.ItemEntity
 import moscow.mech.website.domain.order.entity.OrderEntity
+import moscow.mech.website.domain.order.entity.StatusEntity
 import moscow.mech.website.domain.order.entity.UserOrderEntity
 import moscow.mech.website.domain.order.repository.ItemRepository
 import moscow.mech.website.domain.order.repository.OrderRepository
@@ -16,6 +17,7 @@ import moscow.mech.website.domain.user.entity.UserEntity
 import moscow.mech.website.dto.order.Item
 import moscow.mech.website.dto.order.ItemShortened
 import moscow.mech.website.dto.order.Order
+import moscow.mech.website.dto.order.Status
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -35,6 +37,7 @@ class OrderService @Autowired constructor(
         orderRepository.findByUserId(securityService.getUserId()) ?.let { return it.map { o -> Order(
             o.id!!,
             o.created,
+            Status(o.status.id, o.status.name),
             o.items!!.stream().map { i -> Item(
                 i.product.id,
                 i.qty,
@@ -53,7 +56,10 @@ class OrderService @Autowired constructor(
 
     fun createOrder(order: List<ItemShortened>) {
         val userId = securityService.getUserId()
-        val orderEntity = orderRepository.save(OrderEntity(UserOrderEntity(userId), LocalDateTime.now()))
+        val orderEntity = orderRepository.save(OrderEntity(
+            UserOrderEntity(userId),
+            entityManager.getReference(StatusEntity::class.java, 1L),
+            LocalDateTime.now()))
 
         val documents = documentRepository.saveAll(order.map { o -> DocumentEntity(
             -o.qty,

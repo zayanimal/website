@@ -8,5 +8,7 @@ data class Order (
 
     val created: LocalDateTime,
 
+    val status: Status,
+
     val product: List<Item>
 )

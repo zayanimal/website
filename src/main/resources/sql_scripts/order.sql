@@ -1,10 +1,21 @@
+create table orders_status (
+    id long auto_increment primary key,
+    name varchar(255) not null
+);
+
+insert into orders_status (name) values('Ожидание оплаты');
+insert into orders_status (name) values('Укомплектован');
+insert into orders_status (name) values('Отправлен');
+insert into orders_status (name) values('Выполнен');
+
 create table orders (
     id long auto_increment primary key,
     created timestamp default CURRENT_TIMESTAMP(),
-    user_id long not null constraint USERS_ORDER_FK_ID references users(id)
+    user_id long not null constraint USERS_ORDER_FK_ID references users(id),
+    status_id long not null constraint STATUS_ORDER_FK_ID references orders_status(id)
 );
 
-insert into orders (user_id) values (1);
+insert into orders (user_id, status_id) values (1, 1);
 
 create table orders_item (
     id long auto_increment primary key,

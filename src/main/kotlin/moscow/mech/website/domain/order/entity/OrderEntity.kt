@@ -13,6 +13,10 @@ class OrderEntity (
     @JoinColumn(name = "user_id")
     val user: UserOrderEntity,
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    val status: StatusEntity,
+
     @OrderBy("created DESC")
     val created: LocalDateTime,
 
