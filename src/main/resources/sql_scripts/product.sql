@@ -1,25 +1,3 @@
-drop table if exists pictures;
-drop table if exists features;
-drop table if exists products;
-drop table if exists categories;
-
-create table categories (
-    id long auto_increment primary key,
-    name varchar(255)
-);
-
-insert into categories (name) values ('Куртки');
-insert into categories (name) values ('Брюки');
-insert into categories (name) values ('Флиски');
-insert into categories (name) values ('Толстовки');
-insert into categories (name) values ('Рубашки');
-insert into categories (name) values ('Лонгсливы');
-insert into categories (name) values ('Футболки');
-insert into categories (name) values ('Варежки');
-insert into categories (name) values ('Шарфы');
-insert into categories (name) values ('Шопперы');
-insert into categories (name) values ('Шорты');
-
 create table products (
     id long auto_increment primary key,
     title varchar(500),

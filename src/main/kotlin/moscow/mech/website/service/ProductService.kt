@@ -1,7 +1,7 @@
 package moscow.mech.website.service
 
 import moscow.mech.website.domain.document.entity.StockEntity
-import moscow.mech.website.domain.product.entity.CategoryEntity
+import moscow.mech.website.domain.section.entity.CategoryEntity
 import moscow.mech.website.domain.product.entity.PictureEntity
 import moscow.mech.website.domain.product.repository.ProductRepository
 import moscow.mech.website.dto.product.Feature
@@ -36,7 +36,9 @@ class ProductService @Autowired constructor(
     }
 
     fun getProducts(categoryId: Long): List<Product> {
-        val products = productRepository.findByCategory(CategoryEntity(categoryId))
+        val products = productRepository.findByCategory(
+            entityManager.getReference(CategoryEntity::class.java, categoryId)
+        )
 
         return products.map { Product(
             it.id,

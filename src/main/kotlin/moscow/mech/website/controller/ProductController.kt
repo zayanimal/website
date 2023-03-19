@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("product")
-class ProductController (
-    @Autowired val productService: ProductService
-) {
+class ProductController @Autowired constructor(val productService: ProductService) {
+
     @GetMapping(params = ["id"])
     fun getProduct(@RequestParam id: Long): ResponseEntity<ProductCard> {
         return ResponseEntity.ok(productService.getProductCard(id))

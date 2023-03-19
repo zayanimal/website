@@ -22,12 +22,6 @@ spring:
     console:
       enabled: true
 
-  security:
-    user:
-      name: sergey
-      password: sergey
-      roles: manager
-
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER

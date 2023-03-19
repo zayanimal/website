@@ -1,15 +1,16 @@
-package moscow.mech.website.domain.product.entity
+package moscow.mech.website.domain.section.entity
 
 import javax.persistence.*
 
 @Entity
 @Table(name = "CATEGORIES")
 class CategoryEntity (
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Long,
 
-    val name: String
-) {
-    constructor(id: Long) : this(id, "")
-}
+    val name: String,
+
+    val enabled: Boolean
+)

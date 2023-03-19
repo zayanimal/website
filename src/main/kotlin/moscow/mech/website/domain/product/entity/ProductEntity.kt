@@ -1,5 +1,6 @@
 package moscow.mech.website.domain.product.entity
 
+import moscow.mech.website.domain.section.entity.CategoryEntity
 import javax.persistence.*
 
 @Entity
