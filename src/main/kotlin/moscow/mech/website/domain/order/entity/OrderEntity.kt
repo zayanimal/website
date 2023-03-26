@@ -11,7 +11,7 @@ class OrderEntity (
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    val user: UserOrderEntity,
+    val user: UserIdEntity,
 
     @ManyToOne
     @JoinColumn(name = "status_id")

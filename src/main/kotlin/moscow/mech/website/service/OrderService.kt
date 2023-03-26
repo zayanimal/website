@@ -8,7 +8,7 @@ import moscow.mech.website.domain.document.repository.DocumentRepository
 import moscow.mech.website.domain.order.entity.ItemEntity
 import moscow.mech.website.domain.order.entity.OrderEntity
 import moscow.mech.website.domain.order.entity.StatusEntity
-import moscow.mech.website.domain.order.entity.UserOrderEntity
+import moscow.mech.website.domain.order.entity.UserIdEntity
 import moscow.mech.website.domain.order.repository.ItemRepository
 import moscow.mech.website.domain.order.repository.OrderRepository
 import moscow.mech.website.domain.product.entity.PictureEntity
@@ -57,7 +57,7 @@ class OrderService @Autowired constructor(
     fun createOrder(order: List<ItemShortened>) {
         val userId = securityService.getUserId()
         val orderEntity = orderRepository.save(OrderEntity(
-            UserOrderEntity(userId),
+            UserIdEntity(userId),
             entityManager.getReference(StatusEntity::class.java, 1L),
             LocalDateTime.now()))
 

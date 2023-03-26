@@ -6,7 +6,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "USERS")
-class UserOrderEntity (
+class UserIdEntity (
 
     @Id
     val id: Long

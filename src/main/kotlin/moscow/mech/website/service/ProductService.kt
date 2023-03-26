@@ -2,7 +2,6 @@ package moscow.mech.website.service
 
 import moscow.mech.website.domain.document.entity.StockEntity
 import moscow.mech.website.domain.section.entity.CategoryEntity
-import moscow.mech.website.domain.product.entity.PictureEntity
 import moscow.mech.website.domain.product.repository.ProductRepository
 import moscow.mech.website.dto.product.Feature
 import moscow.mech.website.dto.product.Product
@@ -15,7 +14,8 @@ import javax.persistence.EntityManager
 @Service
 class ProductService @Autowired constructor(
     val productRepository: ProductRepository,
-    val entityManager: EntityManager
+    val entityManager: EntityManager,
+    val commonService: CommonService
 ) {
 
     fun getProductCard(productId: Long): ProductCard {
@@ -44,11 +44,7 @@ class ProductService @Autowired constructor(
             it.id,
             it.title,
             it.price,
-            getPicture(it.pictures)
+            commonService.getPicture(it.pictures)
         ) }
-    }
-
-    private fun getPicture(pictures: List<PictureEntity>): String {
-        return if (pictures.isEmpty()) "" else pictures.first().identification
     }
 }
