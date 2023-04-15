@@ -1,7 +1,8 @@
 package moscow.mech.website.dto.user
 
 data class Contact(
-    val id: Long,
+
+    val id: Long?,
 
     val phone: String,
 

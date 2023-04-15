@@ -1,6 +1,7 @@
 package moscow.mech.website.dto.user
 
 data class User(
+
     val login: String,
 
     val role: List<String>,

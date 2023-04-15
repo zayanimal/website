@@ -1,7 +1,8 @@
 package moscow.mech.website.dto.user
 
 data class Address(
-    val id: Long,
+
+    val id: Long?,
 
     val index: String,
 
