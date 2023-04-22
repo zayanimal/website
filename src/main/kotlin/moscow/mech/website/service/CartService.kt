@@ -40,8 +40,20 @@ class CartService @Autowired constructor(
         ))
     }
 
+    fun createAll(items: List<CartItemCreate>) {
+        itemRepository.saveAll(items.map { CartItemEntity(
+            it.qty,
+            entityManager.getReference(UserEntity::class.java, securityService.getUserId()),
+            entityManager.getReference(ProductEntity::class.java, it.productId),
+            entityManager.getReference(AttributeEntity::class.java, it.attributeId)
+        ) })
+    }
+
     fun delete(id: Long) {
-        itemRepository.deleteById(id)
+        val item = itemRepository.findById(id).get()
+        item.user.id?.let { securityService.checkUser(it) {
+            item.id?.let { it1 -> itemRepository.deleteById(it1) }
+        } }
     }
 
     @Transactional

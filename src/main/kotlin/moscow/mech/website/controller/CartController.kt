@@ -28,6 +28,11 @@ class CartController @Autowired constructor(
         cartService.create(item)
     }
 
+    @PutMapping("/all")
+    fun createAll(@RequestBody items: List<CartItemCreate>) {
+        cartService.createAll(items)
+    }
+
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long) {
         cartService.delete(id)

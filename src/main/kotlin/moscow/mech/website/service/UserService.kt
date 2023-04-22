@@ -11,7 +11,9 @@ import moscow.mech.website.dto.user.Address
 import moscow.mech.website.dto.user.Contact
 import moscow.mech.website.dto.user.Recipient
 import moscow.mech.website.dto.user.User
+import moscow.mech.website.exception.BadUserException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Service
 import kotlin.streams.toList
 
@@ -42,14 +44,16 @@ class UserService @Autowired constructor (
             address.city,
             address.street,
             address.home,
-            address.flat
+            address.flat,
+            securityService.getUserId()
         )
     )
 
     fun createContact(contact: Contact) = contactRepository.save(
         ContactEntity(
             contact.phone,
-            contact.email
+            contact.email,
+            securityService.getUserId()
         )
     )
 
@@ -57,7 +61,29 @@ class UserService @Autowired constructor (
         RecipientEntity(
             recipient.surname,
             recipient.name,
-            recipient.middleName
+            recipient.middleName,
+            securityService.getUserId()
         )
     )
+
+    fun deleteAddress(id: Long) {
+        val address = addressRepository.findById(id).get()
+        address.userId?.let { securityService.checkUser(it) {
+            address.id?.let { it1 -> addressRepository.deleteById(it1) }
+        } }
+    }
+
+    fun deleteContact(id: Long) {
+        val contact = contactRepository.findById(id).get()
+        contact.userId?.let { securityService.checkUser(it) {
+            contact.id?.let { it1 -> contactRepository.deleteById(it1) }
+        } }
+    }
+
+    fun deleteRecipient(id: Long) {
+        val recipient = recipientRepository.findById(id).get()
+        recipient.userId?.let { securityService.checkUser(it) {
+            recipient.id?.let { it1 -> recipientRepository.deleteById(it1)}
+        } }
+    }
 }
