@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RestController
 class AuthController @Autowired constructor(val authService: AuthService) {
 
     @PostMapping("login")
-    fun login(@RequestBody request: AuthRequest): ResponseEntity<AuthResponse> = ResponseEntity
-        .ok()
-        .body(authService.login(request))
+    fun login(@RequestBody request: AuthRequest): ResponseEntity<AuthResponse> {
+        val response = authService.login(request)
+        return ResponseEntity
+            .ok()
+            .header("Set-Cookie", "token=${response.token}")
+            .body(AuthResponse(response.username, response.role))
+    }
 
     @PutMapping("register")
     fun register(@RequestBody registration: AuthRegistration): UserEntity = authService.create(registration)
