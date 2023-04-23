@@ -10,12 +10,12 @@ import javax.sql.DataSource
 
 @Configuration
 @EnableTransactionManagement
-class DataBaseConfiguration(
+open class DataBaseConfiguration(
     @Autowired val dataSource: DataSource
 ) {
 
     @Bean
-    fun transactionManager(): PlatformTransactionManager {
+    open fun transactionManager(): PlatformTransactionManager {
         return DataSourceTransactionManager(dataSource)
     }
 }

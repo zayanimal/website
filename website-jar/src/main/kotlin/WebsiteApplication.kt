@@ -3,8 +3,8 @@ package moscow.mech.website
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication
-class WebsiteApplication
+@SpringBootApplication(scanBasePackages = ["moscow.mech.website", "configuration"])
+open class WebsiteApplication
 
 fun main(args: Array<String>) {
 	runApplication<WebsiteApplication>(*args)

@@ -25,13 +25,13 @@ import javax.servlet.http.HttpServletResponse
 
 @Configuration
 @EnableWebSecurity
-class AuthConfiguration(
+open class AuthConfiguration(
     @Autowired val authRepository: AuthRepository,
     @Autowired val jwtTokenFilter: JwtTokenFilter
 ) {
 
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+    open fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authenticationManager(authenticationManager())
             // CORS и CSRF
@@ -76,7 +76,7 @@ class AuthConfiguration(
     }
 
     @Bean
-    fun authenticationManager(): AuthenticationManager {
+    open fun authenticationManager(): AuthenticationManager {
         val authProvider = DaoAuthenticationProvider()
         authProvider.setUserDetailsService { username ->
             val user = authRepository.findByLogin(username)
@@ -94,7 +94,7 @@ class AuthConfiguration(
     }
 
     @Bean
-    fun corsFilter(): CorsFilter {
+    open fun corsFilter(): CorsFilter {
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration()
 
@@ -108,7 +108,7 @@ class AuthConfiguration(
     }
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder {
+    open fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
 }
