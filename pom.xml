@@ -18,10 +18,10 @@
 	</parent>
 
 	<groupId>moscow.mech</groupId>
-	<artifactId>application</artifactId>
+	<artifactId>app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mech</name>
-	<description>Moscow streetwear</description>
+	<description>Moscow Streetwear</description>
 
 	<properties>
 		<deployment.name>website-${project.version}</deployment.name>
