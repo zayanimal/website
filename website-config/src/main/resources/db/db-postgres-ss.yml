@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-postgres
+  namespace: default
+spec:
+  serviceName: db-postgres
+  selector:
+    matchLabels:
+      app: db-postgres
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db-postgres
+    spec:
+      containers:
+        - name: db-postgres
+          image: postgres
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: db-postgres-cm
+          ports:
+            - name: tcp
+              containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        resources:
+          requests:
+            storage: 5Gi
+        accessModes:
+          - ReadWriteOnce

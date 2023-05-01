@@ -8,6 +8,7 @@
 		<module>website-jar</module>
 		<module>website-config</module>
 		<module>website-main</module>
+		<module>data-base</module>
 	</modules>
 
 	<parent>

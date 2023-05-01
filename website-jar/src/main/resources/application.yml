@@ -4,7 +4,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:file:/Users/zayanimal/Desktop/mech/website-jar/src/main/resources/data/test;AUTO_SERVER=true
+    url: jdbc:h2:file:${HOME}/Desktop/mech/data-base/src/main/resources/data/test;AUTO_SERVER=true
     username: sa
     password: password
     driverClassName: org.h2.Driver

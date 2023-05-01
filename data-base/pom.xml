@@ -3,15 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>moscow.mech</groupId>
         <artifactId>app</artifactId>
+        <groupId>moscow.mech</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>website-config</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>data-base</artifactId>
 
     <build>
         <plugins>
@@ -20,7 +18,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
 
                 <configuration>
-                    <outputDirectory>../website-jar/target/config</outputDirectory>
+                    <outputDirectory>../website-jar/target/db</outputDirectory>
                     <delimiters>
                         <delimeter>@</delimeter>
                     </delimiters>
@@ -28,6 +26,9 @@
                     <resources>
                         <resource>
                             <directory>src/main/resources</directory>
+                            <excludes>
+                                <exclude>**/data/**</exclude>
+                            </excludes>
                             <filtering>true</filtering>
                         </resource>
                     </resources>
