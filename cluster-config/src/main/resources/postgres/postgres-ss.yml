@@ -17,10 +17,11 @@ spec:
       containers:
         - name: db-postgres
           image: postgres
-          imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
                 name: db-postgres-cm
+            - secretRef:
+                name: secret
           ports:
             - name: tcp
               containerPort: 5432

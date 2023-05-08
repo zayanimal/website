@@ -4,11 +4,9 @@ metadata:
   name: db-postgres
   namespace: default
 spec:
-  type: NodePort
+  clusterIP: None
   selector:
     app: db-postgres
   ports:
-    - nodePort: 30123
-      protocol: TCP
+    - name: tcp
       port: 5432
-      targetPort: 5432

@@ -3,7 +3,5 @@ kind: ConfigMap
 metadata:
   name: db-postgres-cm
 data:
-  POSTGRES_USER: 'postgres'
-  POSTGRES_PASSWORD: 'secret'
   POSTGRES_DB: 'postgres'
   PGDATA: '/var/lib/postgresql/data/pgdata'

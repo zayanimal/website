@@ -10,7 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>website-config</artifactId>
+    <artifactId>cluster-config</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <build>
@@ -20,7 +20,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
 
                 <configuration>
-                    <outputDirectory>../website-jar/target/config</outputDirectory>
+                    <outputDirectory>../website-jar/target</outputDirectory>
                     <delimiters>
                         <delimeter>@</delimeter>
                     </delimiters>

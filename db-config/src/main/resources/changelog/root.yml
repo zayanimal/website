@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/release-0.0.1/user.sql
+  - include:
+      file: db/changelog/release-0.0.1/section.sql
+  - include:
+      file: db/changelog/release-0.0.1/product.sql
+  - include:
+      file: db/changelog/release-0.0.1/attribute.sql
+  - include:
+      file: db/changelog/release-0.0.1/document.sql
+  - include:
+      file: db/changelog/release-0.0.1/order.sql
+  - include:
+      file: db/changelog/release-0.0.1/cart.sql

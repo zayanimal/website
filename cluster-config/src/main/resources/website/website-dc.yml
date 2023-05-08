@@ -6,7 +6,6 @@ metadata:
   name: @deployment.name@
   namespace: default
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
@@ -24,11 +23,13 @@ spec:
     spec:
       containers:
         - image: luksa/kubia:v1
-          imagePullPolicy: IfNotPresent
           name: @deployment.name@
+          envFrom:
+            - configMapRef:
+                name: @deployment.name@-cm
+            - secretRef:
+                name: secret
           ports:
             - containerPort: 8080
               protocol: TCP
-      dnsPolicy: ClusterFirst
       restartPolicy: Always
-      terminationGracePeriodSeconds: 30

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>data-base</artifactId>
+    <artifactId>db-config</artifactId>
 
     <build>
         <plugins>
@@ -18,7 +18,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
 
                 <configuration>
-                    <outputDirectory>../website-jar/target/db</outputDirectory>
+                    <outputDirectory>../website-jar/target/classes/db</outputDirectory>
                     <delimiters>
                         <delimeter>@</delimeter>
                     </delimiters>
