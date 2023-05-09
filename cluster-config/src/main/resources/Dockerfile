@@ -1,7 +1,7 @@
 FROM adoptopenjdk/maven-openjdk11
 
 RUN mkdir -p /opt
-COPY website-jar.jar /opt/app
+COPY *.jar /opt/app/
 COPY entry-point.sh /opt/
 
 RUN chmod +x /opt/entry-point.sh

@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: website
 spec:
+  type: NodePort
   selector:
     name: website
   ports:
-    - name: http
-      port: 80
+    - port: 80
       targetPort: 8080
+      nodePort: 30123

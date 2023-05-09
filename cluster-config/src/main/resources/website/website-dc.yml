@@ -22,7 +22,7 @@ spec:
         app: @deployment.name@
     spec:
       containers:
-        - image: luksa/kubia:v1
+        - image: zayanimal/website:v1
           name: @deployment.name@
           envFrom:
             - configMapRef:
