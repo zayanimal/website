@@ -1,12 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: website
+  labels:
+    app: @deployment.name@
+  name: @deployment.name@
 spec:
   type: NodePort
   selector:
-    name: website
+    app: @deployment.name@
   ports:
-    - port: 80
+    - nodePort: 30123
+      port: 8080
+      protocol: TCP
       targetPort: 8080
-      nodePort: 30123
