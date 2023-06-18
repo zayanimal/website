@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ecommerce-ingress
+  namespace: ecommerce
+  annotations:
+    rewrite-target: /$1
+spec:
+  rules:
+    - host: ecommerce
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ecommerce
+                port:
+                  number: 8080
+
+# curl --resolve "ecommerce:80:$( minikube ip )" -i http://ecommerce/api/v1/section

@@ -25,7 +25,7 @@
 	<description>Moscow Streetwear</description>
 
 	<properties>
-		<deployment.name>website</deployment.name>
+		<deployment.name>ecommerce</deployment.name>
 
 		<java.version>11</java.version>
 

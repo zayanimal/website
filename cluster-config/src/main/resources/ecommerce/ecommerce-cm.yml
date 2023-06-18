@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: @deployment.name@-cm
+  namespace: @deployment.name@
+data:
+  POSTGRES_HOST: 'db-postgres-0.db-postgres.@deployment.name@.svc.cluster.local'

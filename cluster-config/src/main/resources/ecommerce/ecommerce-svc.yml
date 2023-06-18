@@ -4,6 +4,7 @@ metadata:
   labels:
     app: @deployment.name@
   name: @deployment.name@
+  namespace: @deployment.name@
 spec:
   type: NodePort
   selector:

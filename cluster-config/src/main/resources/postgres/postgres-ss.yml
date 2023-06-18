@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: db-postgres
-  namespace: default
+  namespace: @deployment.name@
 spec:
   serviceName: db-postgres
   selector:
